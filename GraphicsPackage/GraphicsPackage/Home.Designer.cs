@@ -33,6 +33,7 @@ namespace GraphicsPackage
             this.chooseLabel = new System.Windows.Forms.Label();
             this.ddaBtn = new System.Windows.Forms.Button();
             this.bresenhamLineBtn = new System.Windows.Forms.Button();
+            this.ellipseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // welcomeLabel
@@ -72,11 +73,21 @@ namespace GraphicsPackage
             this.bresenhamLineBtn.Text = "Bresenham Line";
             this.bresenhamLineBtn.UseVisualStyleBackColor = true;
             // 
+            // ellipseBtn
+            // 
+            this.ellipseBtn.Location = new System.Drawing.Point(308, 257);
+            this.ellipseBtn.Name = "ellipseBtn";
+            this.ellipseBtn.Size = new System.Drawing.Size(138, 29);
+            this.ellipseBtn.TabIndex = 4;
+            this.ellipseBtn.Text = "Ellipse Algorithm";
+            this.ellipseBtn.UseVisualStyleBackColor = true;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ellipseBtn);
             this.Controls.Add(this.bresenhamLineBtn);
             this.Controls.Add(this.ddaBtn);
             this.Controls.Add(this.chooseLabel);
@@ -96,5 +107,6 @@ namespace GraphicsPackage
         private System.Windows.Forms.Label chooseLabel;
         private System.Windows.Forms.Button ddaBtn;
         private System.Windows.Forms.Button bresenhamLineBtn;
+        private System.Windows.Forms.Button ellipseBtn;
     }
 }

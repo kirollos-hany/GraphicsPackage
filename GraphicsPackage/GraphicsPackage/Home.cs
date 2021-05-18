@@ -17,6 +17,7 @@ namespace GraphicsPackage
             InitializeComponent();
             ddaBtn.Click += OnDDABtnClick;
             bresenhamLineBtn.Click += OnBresenhamLineBtnClick;
+            ellipseBtn.Click += OnEllipseBtnClick;
         }
         public void OnDDABtnClick(object source, EventArgs args)
         {
@@ -29,6 +30,13 @@ namespace GraphicsPackage
         {
             var bresenhamForm = new BresenhamLineForm();
             bresenhamForm.Show();
+            Hide();
+        }
+
+        public void OnEllipseBtnClick(object source, EventArgs args)
+        {
+            var ellipseForm = new EllipseForm();
+            ellipseForm.Show();
             Hide();
         }
 

@@ -18,3 +18,4 @@ D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPac
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.DDAForm.resources
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.Home.resources
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.BresenhamLineForm.resources
+D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.EllipseForm.resources

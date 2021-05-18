@@ -106,7 +106,7 @@ namespace GraphicsPackage
             // 
             this.xStartTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.xStartTextBox.Location = new System.Drawing.Point(60, 205);
-            this.xStartTextBox.MaxLength = 10;
+            this.xStartTextBox.MaxLength = 4;
             this.xStartTextBox.Name = "xStartTextBox";
             this.xStartTextBox.Size = new System.Drawing.Size(83, 27);
             this.xStartTextBox.TabIndex = 5;
@@ -123,7 +123,7 @@ namespace GraphicsPackage
             // yStartTextBox
             // 
             this.yStartTextBox.Location = new System.Drawing.Point(60, 263);
-            this.yStartTextBox.MaxLength = 10;
+            this.yStartTextBox.MaxLength = 4;
             this.yStartTextBox.Name = "yStartTextBox";
             this.yStartTextBox.Size = new System.Drawing.Size(83, 27);
             this.yStartTextBox.TabIndex = 7;
@@ -140,7 +140,7 @@ namespace GraphicsPackage
             // xEndTextBox
             // 
             this.xEndTextBox.Location = new System.Drawing.Point(60, 325);
-            this.xEndTextBox.MaxLength = 10;
+            this.xEndTextBox.MaxLength = 4;
             this.xEndTextBox.Name = "xEndTextBox";
             this.xEndTextBox.Size = new System.Drawing.Size(83, 27);
             this.xEndTextBox.TabIndex = 9;
@@ -157,7 +157,7 @@ namespace GraphicsPackage
             // yEndTextBox
             // 
             this.yEndTextBox.Location = new System.Drawing.Point(60, 383);
-            this.yEndTextBox.MaxLength = 10;
+            this.yEndTextBox.MaxLength = 4;
             this.yEndTextBox.Name = "yEndTextBox";
             this.yEndTextBox.Size = new System.Drawing.Size(83, 27);
             this.yEndTextBox.TabIndex = 11;

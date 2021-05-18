@@ -21,9 +21,11 @@ namespace GraphicsPackage
         private delegate void OnLineDrawn();
         private event OnLineDrawn LineDrawn;
         private int linesDrawn;
+        private volatile bool fromDrawBtn;
         public BresenhamLineForm()
         {
             InitializeComponent();
+            fromDrawBtn = false;
             linesDrawn = 0;
             isMouseClicked = false;
             pixelWidth = 1;
@@ -41,8 +43,8 @@ namespace GraphicsPackage
             LineDrawn += OnLineDrawnCallback;
             backBtn.Click += OnBackBtnClicked;
             FormClosing += OnFormClosing;
-            xRangeLabel.Text = $"X < {picToDrawLine.Width}";
-            yRangeLabel.Text = $"Y < {picToDrawLine.Height}";
+            xRangeLabel.Text = $"{-picToDrawLine.Width} < X < {picToDrawLine.Width}";
+            yRangeLabel.Text = $"{-picToDrawLine.Height} < Y < {picToDrawLine.Height}";
         }
         private void SetPixel(int x, int y)
         {
@@ -90,8 +92,19 @@ namespace GraphicsPackage
             bresenhamLine.Algorithm(xStart, yStart, xEnd, yEnd);
             for (int i = 0; i < bresenhamLine.XPoints.Count; i++)
             {
-                SetPixel(Convert.ToInt32(bresenhamLine.XPoints[i]), Convert.ToInt32(bresenhamLine.YPoints[i]));
+                if (fromDrawBtn)
+                {
+                    int x = picToDrawLine.Width / 2 + Convert.ToInt32(bresenhamLine.XPoints[i]);
+                    int y = picToDrawLine.Height / 2 - Convert.ToInt32(bresenhamLine.YPoints[i]);
+                    SetPixel(x, y);
+                }
+                else
+                {
+                    SetPixel(Convert.ToInt32(bresenhamLine.XPoints[i]), Convert.ToInt32(bresenhamLine.YPoints[i]));
+                }
+                
             }
+            fromDrawBtn = false;
             linesDrawn++;
             LineDrawn();
         }
@@ -132,13 +145,14 @@ namespace GraphicsPackage
                     yStart = Convert.ToInt32(yStartTextBox.Text);
                     xEnd = Convert.ToInt32(xEndTextBox.Text);
                     yEnd = Convert.ToInt32(yEndTextBox.Text);
-                    if(xStart > picToDrawLine.Width || xEnd > picToDrawLine.Width || yStart > picToDrawLine.Height || yEnd > picToDrawLine.Height)
+                    if(Math.Abs(xStart) > picToDrawLine.Width || Math.Abs(xEnd) > picToDrawLine.Width || Math.Abs(yStart) > picToDrawLine.Height || Math.Abs(yEnd) > picToDrawLine.Height)
                     {
                         MessageBox.Show("Please enter values within valid range", "Out Of Range", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
                     else
                     {
+                        fromDrawBtn = true;
                         StartDrawLine();
                     }
                 }
@@ -159,7 +173,6 @@ namespace GraphicsPackage
 
         public void OnBackBtnClicked(object source, EventArgs args)
         {
-            Application.OpenForms.Cast<Form>().First(form => form.Name == "Home").Show();
             Close();
         }
         public void OnFormClosing(object source, FormClosingEventArgs args)
