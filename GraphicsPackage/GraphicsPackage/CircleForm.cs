@@ -85,15 +85,10 @@ namespace GraphicsPackage
 
         private void OnCircleDrawnCallback()
         {
-            int decisionIndex = 0;
-            for (int i = 0; i < circleDrawer.XPoints.Count; i++)
+            for (int i = 0; i < circleDrawer.XPoints.Count / 8; i++)
             {
-                if (i % 4 == 0 && i <= circleDrawer.PKPoints.Count)
-                {
-                    decisionIndex++;
-                }
+                string decision = circleDrawer.PKPoints[i].ToString(); ;
                 string circleNum = numOfCircles.ToString();
-                string decision = circleDrawer.PKPoints[decisionIndex].ToString();
                 string x = Convert.ToInt32(circleDrawer.XPoints[i]).ToString();
                 string y = Convert.ToInt32(circleDrawer.YPoints[i]).ToString();
                 string[] tableRow = { circleNum, decision, x, y, $"({x},{y})" };

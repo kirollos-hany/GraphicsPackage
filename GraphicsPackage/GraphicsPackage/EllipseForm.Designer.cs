@@ -46,7 +46,6 @@ namespace GraphicsPackage
             this.yRangeLabel = new System.Windows.Forms.Label();
             this.ellipseResultTable = new System.Windows.Forms.DataGridView();
             this.ellipseNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.region = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.decision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -192,7 +191,6 @@ namespace GraphicsPackage
             this.ellipseResultTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ellipseResultTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ellipseNum,
-            this.region,
             this.decision,
             this.x,
             this.y,
@@ -212,14 +210,6 @@ namespace GraphicsPackage
             this.ellipseNum.Name = "ellipseNum";
             this.ellipseNum.ReadOnly = true;
             this.ellipseNum.Width = 125;
-            // 
-            // region
-            // 
-            this.region.HeaderText = "Region";
-            this.region.MinimumWidth = 6;
-            this.region.Name = "region";
-            this.region.ReadOnly = true;
-            this.region.Width = 125;
             // 
             // decision
             // 
@@ -302,7 +292,6 @@ namespace GraphicsPackage
         private System.Windows.Forms.Label yRangeLabel;
         private System.Windows.Forms.DataGridView ellipseResultTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn ellipseNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn region;
         private System.Windows.Forms.DataGridViewTextBoxColumn decision;
         private System.Windows.Forms.DataGridViewTextBoxColumn x;
         private System.Windows.Forms.DataGridViewTextBoxColumn y;

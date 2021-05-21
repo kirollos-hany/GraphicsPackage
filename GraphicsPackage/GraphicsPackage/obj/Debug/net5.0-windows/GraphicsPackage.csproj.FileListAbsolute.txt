@@ -19,3 +19,4 @@ D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPac
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\ref\GraphicsPackage.dll
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.pdb
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.genruntimeconfig.cache
+D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.csprojAssemblyReference.cache

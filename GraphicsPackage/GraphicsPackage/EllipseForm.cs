@@ -67,16 +67,10 @@ namespace GraphicsPackage
         private void DrawEllipseAsync()
         {
             ellipseMidpoint.Algorithm(rx, ry, xc, yc);
-            for(int i = 0; i < ellipseMidpoint.RegionOneX.Count; i++)
+            for(int i = 0; i < ellipseMidpoint.Xpoints.Count; i++)
             {
-                int x = picToDrawEllipse.Width / 2 + Convert.ToInt32(ellipseMidpoint.RegionOneX[i]);
-                int y = picToDrawEllipse.Height / 2 - Convert.ToInt32(ellipseMidpoint.RegionOneY[i]);
-                SetPixel(x, y);
-            }
-            for(int i = 0; i < ellipseMidpoint.RegionTwoX.Count; i++)
-            {
-                int x = picToDrawEllipse.Width / 2 + Convert.ToInt32(ellipseMidpoint.RegionTwoX[i]);
-                int y = picToDrawEllipse.Height / 2 - Convert.ToInt32(ellipseMidpoint.RegionTwoY[i]);
+                int x = picToDrawEllipse.Width / 2 + Convert.ToInt32(ellipseMidpoint.Xpoints[i]);
+                int y = picToDrawEllipse.Height / 2 - Convert.ToInt32(ellipseMidpoint.Ypoints[i]);
                 SetPixel(x, y);
             }
             numOfEllipses++;
@@ -91,37 +85,13 @@ namespace GraphicsPackage
 
         private void OnEllipseDrawnCallback()
         {
-            int decisionIndex = 0;
-            for(int i = 0; i < ellipseMidpoint.RegionOneX.Count; i++)
+            for(int i = 0; i < ellipseMidpoint. Xpoints.Count / 4; i++)
             {
-                if(i % 4 == 0 && i < ellipseMidpoint.DecisionRegionOne.Count)
-                {
-                    decisionIndex++;
-                }
                 string ellipseNum = numOfEllipses.ToString();
-                string region = "1";
-                string decision = ellipseMidpoint.DecisionRegionOne[decisionIndex].ToString();
-                string x = Convert.ToInt32(ellipseMidpoint.RegionOneX[i]).ToString();
-                string y = Convert.ToInt32(ellipseMidpoint.RegionOneY[i]).ToString();
-                string[] tableRow = { ellipseNum, region, decision, x, y, $"({x},{y})" };
-                Invoke(new MethodInvoker(delegate ()
-                {
-                    ellipseResultTable.Rows.Add(tableRow);
-                }));
-            }
-            decisionIndex = 0;
-            for(int i = 0; i < ellipseMidpoint.RegionTwoX.Count; i++)
-            {
-                if (i % 4 == 0 && i < ellipseMidpoint.DecisionRegionTwo.Count)
-                {
-                    decisionIndex++ ;
-                }
-                string ellipseNum = numOfEllipses.ToString();
-                string region = "2";
-                string decision = ellipseMidpoint.DecisionRegionTwo[decisionIndex].ToString();
-                string x = Convert.ToInt32(ellipseMidpoint.RegionTwoX[i]).ToString();
-                string y = Convert.ToInt32(ellipseMidpoint.RegionTwoY[i]).ToString();
-                string[] tableRow = { ellipseNum, region, decision, x, y, $"({x},{y})" };
+                string decision = ellipseMidpoint.P1points[i].ToString();
+                string x = ellipseMidpoint.Xpoints[i].ToString();
+                string y = ellipseMidpoint.Ypoints[i].ToString();
+                string[] tableRow = { ellipseNum, decision, x, y, $"({x},{y})" };
                 Invoke(new MethodInvoker(delegate ()
                 {
                     ellipseResultTable.Rows.Add(tableRow);

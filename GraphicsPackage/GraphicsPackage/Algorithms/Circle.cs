@@ -6,9 +6,9 @@ namespace GraphicsPackage.Algorithms
 {
     public class Circle
     {
-        public int radius;
         public ArrayList XPoints { get; }
         public ArrayList YPoints { get; }
+
 
         public ArrayList PKPoints { get; }
 
@@ -17,9 +17,12 @@ namespace GraphicsPackage.Algorithms
             XPoints = new ArrayList();
             YPoints = new ArrayList();
             PKPoints = new ArrayList();
+
         }
         public void Algorithm(int radius, int XOrigin, int YOrigin)
         {
+            ArrayList tempXPoints = new ArrayList();
+            ArrayList tempYPoints = new ArrayList();
             PKPoints.Clear();
             XPoints.Clear();
             YPoints.Clear();
@@ -41,16 +44,33 @@ namespace GraphicsPackage.Algorithms
                     pk = pk + (2 * X) + 1 - (2 * Y);
                     PKPoints.Add(pk);
                 }
-                XPoints.Add(X + XOrigin);
-                XPoints.Add(-X + XOrigin);
-                XPoints.Add(X + XOrigin);
-                XPoints.Add(-X + XOrigin);
-
-                YPoints.Add(Y + YOrigin);
-                YPoints.Add(Y + YOrigin);
-                YPoints.Add(-Y + YOrigin);
-                YPoints.Add(-Y + YOrigin);
+                tempXPoints.Add(X);
+                tempYPoints.Add(Y);
             }
+            for (int i = 0; i < 8; i++)
+            {
+                for (int index = 0; index < tempXPoints.Count; index++)
+                {
+                    int xValue = Convert.ToInt32(tempXPoints[index]);
+                    int yValue = Convert.ToInt32(tempYPoints[index]);
+                    switch (i)
+                    {
+                        case 0: SetPixel(XOrigin + xValue, YOrigin + yValue); break;
+                        case 1: SetPixel(XOrigin + yValue, YOrigin + xValue); break;
+                        case 2: SetPixel(XOrigin + yValue, YOrigin - xValue); break;
+                        case 3: SetPixel(XOrigin + xValue, YOrigin - yValue); break;
+                        case 4: SetPixel(XOrigin - xValue, YOrigin - yValue); break;
+                        case 5: SetPixel(XOrigin - yValue, YOrigin - xValue); break;
+                        case 6: SetPixel(XOrigin - yValue, YOrigin + xValue); break;
+                        case 7: SetPixel(XOrigin - xValue, YOrigin + yValue); break;
+                    }
+                }
             }
+        }
+        private void SetPixel(int x, int y)
+        {
+            XPoints.Add(x);
+            YPoints.Add(y);
+        }
         }
     }
