@@ -7,48 +7,50 @@ namespace GraphicsPackage.Algorithms
     public class Circle
     {
         public int radius;
-        public ArrayList Xpoints { get; }
-        public ArrayList Ypoints { get; }
-        public int PK;
+        public ArrayList XPoints { get; }
+        public ArrayList YPoints { get; }
+
+        public ArrayList PKPoints { get; }
 
         public Circle()
         {
-            Xpoints = new ArrayList();
-            Ypoints = new ArrayList();
+            XPoints = new ArrayList();
+            YPoints = new ArrayList();
+            PKPoints = new ArrayList();
         }
-        public void Algorithm(int radius, int XOrigin, int YOrigin, int X, int Y)
+        public void Algorithm(int radius, int XOrigin, int YOrigin)
         {
-            PK = 1 - radius;
-            X = 0;
-            Y = radius;
-            Xpoints.Clear();
-            Ypoints.Clear();
-            int i = 0;
-            while(X !>= Y)
+            PKPoints.Clear();
+            XPoints.Clear();
+            YPoints.Clear();
+            int pk = 1 - radius;
+            PKPoints.Add(pk);
+            int X = 0;
+            int Y = radius;
+            while (X < Y)
             {
-                if(PK < 0)
+                X++;
+                if (pk < 0)
                 {
-                    X++;
-                    PK = PK + 2 * X + 1;
+                    pk = pk + 2 * X + 1;
+                    PKPoints.Add(pk);
                 }
                 else
                 {
-                    X++;
                     Y--;
-                    PK = PK + (2 * X) + 1 - (2 * Y);
+                    pk = pk + (2 * X) + 1 - (2 * Y);
+                    PKPoints.Add(pk);
                 }
-                X = X + XOrigin;
-                Y = Y + YOrigin;
-                Xpoints.Add(X);
-                Ypoints.Add(Y);
-                Xpoints.Add(-X);
-                Ypoints.Add(-Y);
-                Xpoints.Add(Y);
-                Ypoints.Add(X);
-                Xpoints.Add(-Y);
-                Ypoints.Add(-X);
-                i++;
+                XPoints.Add(X + XOrigin);
+                XPoints.Add(-X + XOrigin);
+                XPoints.Add(X + XOrigin);
+                XPoints.Add(-X + XOrigin);
+
+                YPoints.Add(Y + YOrigin);
+                YPoints.Add(Y + YOrigin);
+                YPoints.Add(-Y + YOrigin);
+                YPoints.Add(-Y + YOrigin);
+            }
             }
         }
     }
-}

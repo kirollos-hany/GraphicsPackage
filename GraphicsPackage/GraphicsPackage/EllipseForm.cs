@@ -96,7 +96,7 @@ namespace GraphicsPackage
             {
                 if(i % 4 == 0 && i < ellipseMidpoint.DecisionRegionOne.Count)
                 {
-                    decisionIndex = i;
+                    decisionIndex++;
                 }
                 string ellipseNum = numOfEllipses.ToString();
                 string region = "1";
@@ -114,7 +114,7 @@ namespace GraphicsPackage
             {
                 if (i % 4 == 0 && i < ellipseMidpoint.DecisionRegionTwo.Count)
                 {
-                    decisionIndex = i;
+                    decisionIndex++ ;
                 }
                 string ellipseNum = numOfEllipses.ToString();
                 string region = "2";

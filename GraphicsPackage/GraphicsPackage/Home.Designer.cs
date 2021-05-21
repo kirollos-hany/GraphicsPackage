@@ -34,6 +34,7 @@ namespace GraphicsPackage
             this.ddaBtn = new System.Windows.Forms.Button();
             this.bresenhamLineBtn = new System.Windows.Forms.Button();
             this.ellipseBtn = new System.Windows.Forms.Button();
+            this.circleBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // welcomeLabel
@@ -82,11 +83,21 @@ namespace GraphicsPackage
             this.ellipseBtn.Text = "Ellipse Algorithm";
             this.ellipseBtn.UseVisualStyleBackColor = true;
             // 
+            // circleBtn
+            // 
+            this.circleBtn.Location = new System.Drawing.Point(308, 325);
+            this.circleBtn.Name = "circleBtn";
+            this.circleBtn.Size = new System.Drawing.Size(138, 29);
+            this.circleBtn.TabIndex = 5;
+            this.circleBtn.Text = "Circle Algorithm";
+            this.circleBtn.UseVisualStyleBackColor = true;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.circleBtn);
             this.Controls.Add(this.ellipseBtn);
             this.Controls.Add(this.bresenhamLineBtn);
             this.Controls.Add(this.ddaBtn);
@@ -108,5 +119,6 @@ namespace GraphicsPackage
         private System.Windows.Forms.Button ddaBtn;
         private System.Windows.Forms.Button bresenhamLineBtn;
         private System.Windows.Forms.Button ellipseBtn;
+        private System.Windows.Forms.Button circleBtn;
     }
 }

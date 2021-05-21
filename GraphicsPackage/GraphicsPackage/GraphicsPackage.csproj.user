@@ -4,6 +4,9 @@
     <Compile Update="BresenhamLineForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CircleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="DDAForm.cs">
       <SubType>Form</SubType>
     </Compile>
