@@ -20,3 +20,25 @@ D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPac
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.pdb
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.genruntimeconfig.cache
 D:\FCAI\Level3\Computer Graphics - 1\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.csprojAssemblyReference.cache
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\GraphicsPackage.exe
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\GraphicsPackage.deps.json
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\GraphicsPackage.runtimeconfig.json
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\GraphicsPackage.runtimeconfig.dev.json
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\GraphicsPackage.dll
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\ref\GraphicsPackage.dll
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\bin\Debug\net5.0-windows\GraphicsPackage.pdb
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.csprojAssemblyReference.cache
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.BresenhamLineForm.resources
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.CircleForm.resources
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.DDAForm.resources
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.EllipseForm.resources
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.Home.resources
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.csproj.GenerateResource.cache
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.GeneratedMSBuildEditorConfig.editorconfig
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.AssemblyInfoInputs.cache
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.AssemblyInfo.cs
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.csproj.CoreCompileInputs.cache
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.dll
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\ref\GraphicsPackage.dll
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.pdb
+F:\Mustafa\Level 3\Second Term\Graphic\GraphicsPackage\GraphicsPackage\GraphicsPackage\obj\Debug\net5.0-windows\GraphicsPackage.genruntimeconfig.cache
