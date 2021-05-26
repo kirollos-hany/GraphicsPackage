@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GraphicsPackage.Algorithms
 {
-    class Transmission2D
+    class Transformation2D
     {
-        public static float[] Rotation(float d, int[] Point)
+        public static float[] Rotation(float theta, int[] Point)
         {
             float[] NPoint = new float[3];
             float[,] TransMatrix = new float[3, 3];
-
-            TransMatrix[0, 0] = MathF.Cos(d);
-            TransMatrix[0, 1] = -MathF.Sin(d);
+            TransMatrix[0, 0] = MathF.Cos(theta);
+            TransMatrix[0, 1] = -MathF.Sin(theta);
             TransMatrix[0, 2] = 0;
-            TransMatrix[1, 0] = MathF.Sin(d);
-            TransMatrix[1, 1] = MathF.Cos(d);
+            TransMatrix[1, 0] = MathF.Sin(theta);
+            TransMatrix[1, 1] = MathF.Cos(theta);
             TransMatrix[1, 2] = 0;
             TransMatrix[2, 0] = 0;
             TransMatrix[2, 1] = 0;
@@ -101,24 +97,20 @@ namespace GraphicsPackage.Algorithms
         }
 
         //Reflection Function
-        public static int[] Reflect(int Quatrer, int[] Point)
+        public static int[] Reflect(int Quarter, int[] Point)
         {
-            if (Quatrer == 2)
+            if (Quarter == 2)
             {
                 Point[0] = Point[0] * -1;
             }
-            else if (Quatrer == 3)
+            else if (Quarter == 3)
             {
                 Point[0] = Point[0] * -1;
                 Point[1] = Point[1] * -1;
             }
-            else if (Quatrer == 4)
+            else if (Quarter== 4)
             {
                 Point[1] = Point[1] * -1;
-            }
-            else
-            {
-                Console.WriteLine("Wrong Quarter");
             }
             return Point;
         }
