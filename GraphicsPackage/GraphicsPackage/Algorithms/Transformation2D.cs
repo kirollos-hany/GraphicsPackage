@@ -5,7 +5,7 @@ namespace GraphicsPackage.Algorithms
 {
     class Transformation2D
     {
-        public static float[] Rotation(float theta, int[] Point)
+        public float[] Rotation(float theta, int[] Point)
         {
             float[] NPoint = new float[3];
             float[,] TransMatrix = new float[3, 3];
@@ -35,7 +35,7 @@ namespace GraphicsPackage.Algorithms
 
 
         //Scaling Function
-        public static int[] Scaling(int Sx, int Sy, int[] Point)
+        public int[] Scaling(int Sx, int Sy, int[] Point)
         {
             int[] NPoint = new int[3];
             int[,] TransMatrix = new int[3, 3];
@@ -66,7 +66,7 @@ namespace GraphicsPackage.Algorithms
 
 
         //Translation Function
-        public static int[] Translation(int dx, int dy, int[] Point)
+        public int[] Translation(int dx, int dy, int[] Point)
         {
             int[] NPoint = new int[3];
             int[,] TransMatrix = new int[3, 3];
@@ -97,7 +97,7 @@ namespace GraphicsPackage.Algorithms
         }
 
         //Reflection Function
-        public static int[] Reflect(int Quarter, int[] Point)
+        public int[] Reflect(int Quarter, int[] Point)
         {
             if (Quarter == 2)
             {

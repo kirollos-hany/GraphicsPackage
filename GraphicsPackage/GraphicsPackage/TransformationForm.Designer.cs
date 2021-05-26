@@ -33,7 +33,7 @@ namespace GraphicsPackage
             this.transformationLabel = new System.Windows.Forms.Label();
             this.backBtn = new System.Windows.Forms.Button();
             this.clearBtn = new System.Windows.Forms.Button();
-            this.drawBtn = new System.Windows.Forms.Button();
+            this.transformBtn = new System.Windows.Forms.Button();
             this.translationLabel = new System.Windows.Forms.Label();
             this.translationXTB = new System.Windows.Forms.TextBox();
             this.reflectLabel = new System.Windows.Forms.Label();
@@ -42,7 +42,6 @@ namespace GraphicsPackage
             this.scaleLabel = new System.Windows.Forms.Label();
             this.scaleXTB = new System.Windows.Forms.TextBox();
             this.scaleYTB = new System.Windows.Forms.TextBox();
-            this.shearLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picToDraw)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,14 +82,14 @@ namespace GraphicsPackage
             this.clearBtn.Text = "Clear";
             this.clearBtn.UseVisualStyleBackColor = true;
             // 
-            // drawBtn
+            // transformBtn
             // 
-            this.drawBtn.Location = new System.Drawing.Point(553, 520);
-            this.drawBtn.Name = "drawBtn";
-            this.drawBtn.Size = new System.Drawing.Size(94, 29);
-            this.drawBtn.TabIndex = 13;
-            this.drawBtn.Text = "Draw";
-            this.drawBtn.UseVisualStyleBackColor = true;
+            this.transformBtn.Location = new System.Drawing.Point(553, 520);
+            this.transformBtn.Name = "transformBtn";
+            this.transformBtn.Size = new System.Drawing.Size(94, 29);
+            this.transformBtn.TabIndex = 13;
+            this.transformBtn.Text = "Transform";
+            this.transformBtn.UseVisualStyleBackColor = true;
             // 
             // translationLabel
             // 
@@ -164,21 +163,11 @@ namespace GraphicsPackage
             this.scaleYTB.TabIndex = 21;
             this.scaleYTB.Text = "sy";
             // 
-            // shearLabel
-            // 
-            this.shearLabel.AutoSize = true;
-            this.shearLabel.Location = new System.Drawing.Point(12, 299);
-            this.shearLabel.Name = "shearLabel";
-            this.shearLabel.Size = new System.Drawing.Size(49, 20);
-            this.shearLabel.TabIndex = 22;
-            this.shearLabel.Text = "Shear:";
-            // 
             // TransformationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1613, 574);
-            this.Controls.Add(this.shearLabel);
             this.Controls.Add(this.scaleYTB);
             this.Controls.Add(this.scaleXTB);
             this.Controls.Add(this.scaleLabel);
@@ -187,7 +176,7 @@ namespace GraphicsPackage
             this.Controls.Add(this.reflectLabel);
             this.Controls.Add(this.translationXTB);
             this.Controls.Add(this.translationLabel);
-            this.Controls.Add(this.drawBtn);
+            this.Controls.Add(this.transformBtn);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.transformationLabel);
@@ -206,7 +195,7 @@ namespace GraphicsPackage
         private System.Windows.Forms.Label transformationLabel;
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button clearBtn;
-        private System.Windows.Forms.Button drawBtn;
+        private System.Windows.Forms.Button transformBtn;
         private System.Windows.Forms.Label translationLabel;
         private System.Windows.Forms.TextBox translationXTB;
         private System.Windows.Forms.Label reflectLabel;
@@ -215,6 +204,5 @@ namespace GraphicsPackage
         private System.Windows.Forms.Label scaleLabel;
         private System.Windows.Forms.TextBox scaleXTB;
         private System.Windows.Forms.TextBox scaleYTB;
-        private System.Windows.Forms.Label shearLabel;
     }
 }
