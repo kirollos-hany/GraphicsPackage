@@ -114,5 +114,68 @@ namespace GraphicsPackage.Algorithms
             }
             return Point;
         }
+        //Sher Function
+        public static float[] SherX(float SHx, float[] Point)
+        {
+            float[] NPoint = new float[3];
+            float[,] SherX = new float[3, 3];
+            //INSIALIZING SHERX
+            SherX[0, 0] = 1f;
+            SherX[0, 1] = SHx;
+            SherX[0, 2] = 0f;
+            SherX[1, 0] = 0f;
+            SherX[1, 1] = 1f;
+            SherX[1, 2] = 0f;
+            SherX[2, 0] = 0f;
+            SherX[2, 1] = 0f;
+            SherX[2, 2] = 1f;
+
+            float sum;
+            for (int i = 0; i < 3; i++)
+            {
+                sum = 0;
+                for (int j = 0; j < 3; j++)
+                {
+
+                    sum += SherX[i, j] * Point[j];
+
+                }
+                NPoint[i] = sum;
+
+            }
+            return NPoint;
+        }
+
+        //SherY Function
+        public static float[] SherY(float SHy, float[] Point)
+        {
+            float[] NPoint = new float[3];
+            float[,] SherY = new float[3, 3];
+            //INSIALIZING SHERY
+            SherY[0, 0] = 1f;
+            SherY[0, 1] = 0f;
+            SherY[0, 2] = 0f;
+            SherY[1, 0] = SHy;
+            SherY[1, 1] = 1f;
+            SherY[1, 2] = 0f;
+            SherY[2, 0] = 0f;
+            SherY[2, 1] = 0f;
+            SherY[2, 2] = 1f;
+
+            float sum;
+            for (int i = 0; i < 3; i++)
+            {
+                sum = 0;
+                for (int j = 0; j < 3; j++)
+                {
+
+                    sum += SherY[i, j] * Point[j];
+
+                }
+                NPoint[i] = sum;
+
+            }
+            return NPoint;
+        }
     }
 }

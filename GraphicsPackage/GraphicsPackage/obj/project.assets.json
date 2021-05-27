@@ -8,19 +8,19 @@
     "net5.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\Mustafa Mahmoud\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FCAI\\Level3\\Computer Graphics - 1\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage.csproj",
+      "projectUniqueName": "F:\\Mustafa\\Level 3\\Second Term\\Graphic\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage.csproj",
       "projectName": "GraphicsPackage",
-      "projectPath": "D:\\FCAI\\Level3\\Computer Graphics - 1\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage.csproj",
-      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "D:\\FCAI\\Level3\\Computer Graphics - 1\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage\\obj\\",
+      "projectPath": "F:\\Mustafa\\Level 3\\Second Term\\Graphic\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage.csproj",
+      "packagesPath": "C:\\Users\\Mustafa Mahmoud\\.nuget\\packages\\",
+      "outputPath": "F:\\Mustafa\\Level 3\\Second Term\\Graphic\\GraphicsPackage\\GraphicsPackage\\GraphicsPackage\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mustafa Mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
