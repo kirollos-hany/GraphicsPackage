@@ -17,11 +17,7 @@ namespace GraphicsPackage
         private Bitmap picBitmap;
         private Bitmap pixelToDraw;
         private int pixelWidth, pixelHeight;
-        private delegate void DrawCircleAsyncDel();
         private int r, xc, yc;
-        private DrawCircleAsyncDel drawCircleAsyncDel;
-        private delegate void OnCircleDrawn();
-        private event OnCircleDrawn CircleDrawn;
         private int numOfCircles;
         public CircleForm()
         {
@@ -34,7 +30,6 @@ namespace GraphicsPackage
             pixelWidth = 1;
             pixelHeight = 1;
             pixelToDraw = new Bitmap(pixelWidth, pixelHeight);
-            drawCircleAsyncDel = new DrawCircleAsyncDel(DrawCircleAsync);
 
             FormClosing += OnFormClosing;
             backBtn.Click += OnBackBtnClick;
@@ -44,7 +39,6 @@ namespace GraphicsPackage
             xRangeLabel.Text = $"{-picToDrawCircle.Width} < X < {picToDrawCircle.Width}";
             yRangeLabel.Text = $"{-picToDrawCircle.Height} < Y < {picToDrawCircle.Height}";
 
-            CircleDrawn += OnCircleDrawnCallback;
         }
 
         private void SetPixel(int x, int y)
@@ -64,7 +58,7 @@ namespace GraphicsPackage
             }
         }
 
-        private void DrawCircleAsync()
+        private void DrawCircle()
         {
             circleDrawer.Algorithm(r, xc, yc);
             for (int i = 0; i < circleDrawer.XPoints.Count; i++)
@@ -74,16 +68,10 @@ namespace GraphicsPackage
                 SetPixel(x, y);
             }
             numOfCircles++;
-            CircleDrawn();
+            OnCircleDrawn();
         }
 
-        private void StartDrawCircle()
-        {
-            Thread drawingThread = new Thread(new ThreadStart(drawCircleAsyncDel));
-            drawingThread.Start();
-        }
-
-        private void OnCircleDrawnCallback()
+        private void OnCircleDrawn()
         {
             for (int i = 0; i < circleDrawer.XPoints.Count / 8; i++)
             {
@@ -92,10 +80,7 @@ namespace GraphicsPackage
                 string x = Convert.ToInt32(circleDrawer.XPoints[i]).ToString();
                 string y = Convert.ToInt32(circleDrawer.YPoints[i]).ToString();
                 string[] tableRow = { circleNum, decision, x, y, $"({x},{y})" };
-                Invoke(new MethodInvoker(delegate ()
-                {
-                    circleResultTable.Rows.Add(tableRow);
-                }));
+                circleResultTable.Rows.Add(tableRow);
             }
         }
 
@@ -114,7 +99,7 @@ namespace GraphicsPackage
                     }
                     else
                     {
-                        StartDrawCircle();
+                        DrawCircle();
                     }
                 }
                 else

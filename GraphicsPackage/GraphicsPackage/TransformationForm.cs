@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Windows.Forms;
 using GraphicsPackage.Algorithms;
+
 namespace GraphicsPackage
 {
     public partial class TransformationForm : Form
@@ -25,19 +23,14 @@ namespace GraphicsPackage
         private List<int> endXPoints;
         private List<int> endYPoints;
         private bool isMouseClicked;
-        private delegate void DrawLineAsyncDel();
-        private DrawLineAsyncDel drawLineAsyncDel;
-        private volatile bool isFinishDraw;
         public TransformationForm()
         {
-            isFinishDraw = false;
             InitializeComponent();
             picBitmap = new Bitmap(picToDraw.Width, picToDraw.Height);
             picToDraw.Image = picBitmap;
             picBoxGraphics = picToDraw.CreateGraphics();
             picToDraw.MouseClick += OnMouseClick;
             picToDraw.MouseDoubleClick += OnMouseDoubleClick;
-            drawLineAsyncDel = new DrawLineAsyncDel(DrawLineAsync);
             isMouseClicked = false;
             startXPoints = new List<int>();
             startYPoints = new List<int>();
@@ -79,20 +72,17 @@ namespace GraphicsPackage
                 endXPoints.Add(xEnd);
                 endYPoints.Add(yEnd);
                 isMouseClicked = false;
-                StartDrawLine();
-                while (!isFinishDraw);
+                DrawLine();
             }
         }
 
-        private void StartDrawLine()
+        private double ConvertToRadian(double theta)
         {
-            Thread drawingThread = new Thread(new ThreadStart(drawLineAsyncDel));
-            drawingThread.Start();
+            return theta * (180 / Math.PI);
         }
 
-        private void DrawLineAsync()
+        private void DrawLine()
         {
-            isFinishDraw = false;
             lineDrawer.Algorithm(xStart, yStart, xEnd, yEnd);
             for (int i = 0; i < lineDrawer.XPoints.Count; i++)
             {
@@ -100,13 +90,9 @@ namespace GraphicsPackage
                 int y = Convert.ToInt32(lineDrawer.YPoints[i]);
                 SetPixel(x, y);
             }
-            isFinishDraw = true;
         }
-
         private void SetPixel(int x, int y)
         {
-            lock (picBoxGraphics)
-            {
                 if (x < 0)
                 {
                     x *= -1;
@@ -117,7 +103,6 @@ namespace GraphicsPackage
                 }
                 pixelToDraw.SetPixel(0, 0, Color.Black);
                 picBoxGraphics.DrawImage(pixelToDraw, x, y);
-            }
         }
 
         private void OnClearBtnClicked(object source, EventArgs args)
@@ -127,15 +112,17 @@ namespace GraphicsPackage
             translationYTB.Text = "dy";
             scaleXTB.Text = "sx";
             scaleYTB.Text = "sy";
-            reflectTB.Text = "quadrant";
+            reflectCB.Text = "Select Axis";
+            shearCB.Text = "Select Axis";
+            shearTB.Text = "sh";
             startXPoints.Clear();
             startYPoints.Clear();
             endXPoints.Clear();
             endYPoints.Clear();
+            transformResultTable.Rows.Clear();
         }
         private void TranslatePolygon(int dx, int dy)
         {
-            transformationLabel.Text = startXPoints.Count.ToString();
             picBoxGraphics.Clear(Color.RoyalBlue);
             for (int i = 0; i < startXPoints.Count; i++)
             {
@@ -153,21 +140,178 @@ namespace GraphicsPackage
                 endPoints[2] = 1;
                 startPoints = transformation.Translation(dx, dy, startPoints);
                 endPoints = transformation.Translation(dx, dy, endPoints);
-                xStart = startPoints[0];
-                yStart = startPoints[1];
-                xEnd = endPoints[0];
-                yEnd = endPoints[1];
-                StartDrawLine();
+                xStart = startPoints[0] % picToDraw.Width;
+                yStart = startPoints[1] % picToDraw.Height;
+                xEnd = endPoints[0] % picToDraw.Width;
+                yEnd = endPoints[1] % picToDraw.Height;
+                DrawLine();
+                string[] row = { "Translation", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
+                transformResultTable.Rows.Add(row);
                 startXPoints[i] = xStart;
                 startYPoints[i] = yStart;
                 endXPoints[i] = xEnd;
                 endYPoints[i] = yEnd;
-                while (!isFinishDraw);
             }
         }
+
+        private void ReflectPolygon(int axisIndex)
+        {
+            picBoxGraphics.Clear(Color.RoyalBlue);
+            for (int i = 0; i < startXPoints.Count; i++)
+            {
+                xStart = startXPoints[i];
+                yStart = startYPoints[i];
+                xEnd = endXPoints[i];
+                yEnd = endYPoints[i];
+                int[] startPoints = new int[3];
+                startPoints[0] = xStart;
+                startPoints[1] = yStart;
+                startPoints[2] = 1;
+                int[] endPoints = new int[3];
+                endPoints[0] = xEnd;
+                endPoints[1] = yEnd;
+                endPoints[2] = 1;
+                startPoints = transformation.Reflect(axisIndex, startPoints);
+                endPoints = transformation.Reflect(axisIndex, endPoints);
+                xStart = startPoints[0] % picToDraw.Width;
+                yStart = startPoints[1] % picToDraw.Height;
+                xEnd = endPoints[0] % picToDraw.Width;
+                yEnd = endPoints[1] % picToDraw.Height;
+                DrawLine();
+                string[] row = { "Reflect", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
+                transformResultTable.Rows.Add(row);
+                startXPoints[i] = xStart;
+                startYPoints[i] = yStart;
+                endXPoints[i] = xEnd;
+                endYPoints[i] = yEnd;
+            }
+        }
+        private void ShearPolygon(int axisIndex, int sh)
+        {
+            picBoxGraphics.Clear(Color.RoyalBlue);
+            for (int i = 0; i < startXPoints.Count; i++)
+            {
+                xStart = startXPoints[i];
+                yStart = startYPoints[i];
+                xEnd = endXPoints[i];
+                yEnd = endYPoints[i];
+                int[] startPoints = new int[3];
+                startPoints[0] = xStart;
+                startPoints[1] = yStart;
+                startPoints[2] = 1;
+                int[] endPoints = new int[3];
+                endPoints[0] = xEnd;
+                endPoints[1] = yEnd;
+                endPoints[2] = 1;
+                startPoints = transformation.Shear(startPoints, axisIndex, sh);
+                endPoints = transformation.Shear(endPoints, axisIndex, sh);
+                xStart = startPoints[0] % picToDraw.Width;
+                yStart = startPoints[1] % picToDraw.Height;
+                xEnd = endPoints[0] % picToDraw.Width;
+                yEnd = endPoints[1] % picToDraw.Height;
+                DrawLine();
+                string[] row = { "Shear", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
+                transformResultTable.Rows.Add(row);
+                startXPoints[i] = xStart;
+                startYPoints[i] = yStart;
+                endXPoints[i] = xEnd;
+                endYPoints[i] = yEnd;
+            }
+        }
+
+        private void ScalePolygon(int scaleX, int scaleY)
+        {
+            picBoxGraphics.Clear(Color.RoyalBlue);
+            for (int i = 0; i < startXPoints.Count; i++)
+            {
+                xStart = startXPoints[i];
+                yStart = startYPoints[i];
+                xEnd = endXPoints[i];
+                yEnd = endYPoints[i];
+                int[] startPoints = new int[3];
+                startPoints[0] = xStart;
+                startPoints[1] = yStart;
+                startPoints[2] = 1;
+                int[] endPoints = new int[3];
+                endPoints[0] = xEnd;
+                endPoints[1] = yEnd;
+                endPoints[2] = 1;
+                startPoints = transformation.Scaling(scaleX, scaleY, startPoints);
+                endPoints = transformation.Scaling(scaleX, scaleY, endPoints);
+                xStart = startPoints[0] % picToDraw.Width;
+                yStart = startPoints[1] % picToDraw.Height;
+                xEnd = endPoints[0] % picToDraw.Width;
+                yEnd = endPoints[1] % picToDraw.Height;
+                DrawLine();
+                string[] row = { "Scale", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
+                transformResultTable.Rows.Add(row);
+                startXPoints[i] = xStart;
+                startYPoints[i] = yStart;
+                endXPoints[i] = xEnd;
+                endYPoints[i] = yEnd;
+            }
+        }
+
+        private void TransformationForm_Load(object sender, EventArgs e)
+        {
+            transformResultTable.Columns[0].Width = 220;
+            transformResultTable.Columns[1].Width = 205;
+            transformResultTable.Columns[2].Width = 205;
+        }
+
+        private void RotatePolygon(double theta)
+        {
+            picBoxGraphics.Clear(Color.RoyalBlue);
+            for (int i = 0; i < startXPoints.Count; i++)
+            {
+                xStart = startXPoints[i];
+                yStart = startYPoints[i];
+                xEnd = endXPoints[i];
+                yEnd = endYPoints[i];
+                double[] startPoints = new double[3];
+                startPoints[0] = xStart;
+                startPoints[1] = yStart;
+                startPoints[2] = 1;
+                double[] endPoints = new double[3];
+                endPoints[0] = xEnd;
+                endPoints[1] = yEnd;
+                endPoints[2] = 1;
+                startPoints = transformation.Rotation(theta, startPoints);
+                endPoints = transformation.Rotation(theta, endPoints);
+                xStart = Convert.ToInt32(startPoints[0]) % picToDraw.Width;
+                yStart = Convert.ToInt32(startPoints[1]) % picToDraw.Height;
+                xEnd = Convert.ToInt32(endPoints[0]) % picToDraw.Width;
+                yEnd = Convert.ToInt32(endPoints[1]) % picToDraw.Height;
+                DrawLine();
+                string[] row = { "Rotate", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
+                transformResultTable.Rows.Add(row);
+                startXPoints[i] = xStart;
+                startYPoints[i] = yStart;
+                endXPoints[i] = xEnd;
+                endYPoints[i] = yEnd;
+            }
+        }
+        
+
         public void OnTransformBtnClick(object source, EventArgs args)
         {
-            if(!string.IsNullOrEmpty(translationXTB.Text) && !string.IsNullOrEmpty(translationYTB.Text))
+            if (reflectCB.SelectedIndex != -1)
+            {
+                    ReflectPolygon(reflectCB.SelectedIndex);
+            }
+            if (shearCB.SelectedIndex != -1 && !string.IsNullOrEmpty(shearCB.Text) && !shearCB.Text.Equals("sh"))
+            {
+                try
+                {
+                    ShearPolygon(shearCB.SelectedIndex, Convert.ToInt32(shearTB.Text));
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invalid numbers please enter a valid integer", "Shear Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                    
+            }
+            if (!string.IsNullOrEmpty(translationXTB.Text) && !string.IsNullOrEmpty(translationYTB.Text) && (!translationXTB.Text.Equals("dx") && !translationYTB.Text.Equals("dy")))
             {
                 try
                 {
@@ -177,7 +321,32 @@ namespace GraphicsPackage
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Invalid numbers please enter a valid integer", "Value Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid numbers please enter a valid integer", "Translation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            if (!string.IsNullOrEmpty(scaleXTB.Text) && !string.IsNullOrEmpty(scaleYTB.Text) && (!scaleXTB.Text.Equals("sx") && !scaleYTB.Text.Equals("sy")))
+            {
+                try
+                {
+                    int scaleX = Convert.ToInt32(scaleXTB.Text);
+                    int scaleY = Convert.ToInt32(scaleYTB.Text);
+                    ScalePolygon(scaleX, scaleY);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invalid numbers please enter a valid integer", "Scale Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            if (!string.IsNullOrEmpty(thetaTB.Text) && !thetaTB.Text.Equals("theta"))
+            {
+                try
+                {
+                    double theta = Convert.ToDouble(thetaTB.Text);
+                    RotatePolygon(ConvertToRadian(theta));
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invalid numbers please enter a valid theta in degrees", "Rotate Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

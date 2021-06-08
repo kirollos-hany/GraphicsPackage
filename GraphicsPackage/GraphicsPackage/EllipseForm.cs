@@ -17,11 +17,7 @@ namespace GraphicsPackage
         private Bitmap picBitmap;
         private Bitmap pixelToDraw;
         private int pixelWidth, pixelHeight;
-        private delegate void DrawEllipseAsyncDel();
         private int rx, ry, xc, yc;
-        private DrawEllipseAsyncDel drawEllipseAsyncDel;
-        private delegate void OnEllipseDrawn();
-        private event OnEllipseDrawn EllipseDrawn;
         private int numOfEllipses;
         public EllipseForm()
         {
@@ -34,7 +30,6 @@ namespace GraphicsPackage
             pixelWidth = 1;
             pixelHeight = 1;
             pixelToDraw = new Bitmap(pixelWidth, pixelHeight);
-            drawEllipseAsyncDel= new DrawEllipseAsyncDel(DrawEllipseAsync);
 
             FormClosing += OnFormClosing;
             backBtn.Click += OnBackBtnClick;
@@ -44,7 +39,6 @@ namespace GraphicsPackage
             xRangeLabel.Text = $"{-picToDrawEllipse.Width} < X < {picToDrawEllipse.Width}";
             yRangeLabel.Text = $"{-picToDrawEllipse.Height} < Y < {picToDrawEllipse.Height}";
 
-            EllipseDrawn += OnEllipseDrawnCallback;
         }
 
         private void SetPixel(int x, int y)
@@ -64,7 +58,7 @@ namespace GraphicsPackage
             }
         }
 
-        private void DrawEllipseAsync()
+        private void DrawEllipse()
         {
             ellipseMidpoint.Algorithm(rx, ry, xc, yc);
             for(int i = 0; i < ellipseMidpoint.Xpoints.Count; i++)
@@ -74,16 +68,10 @@ namespace GraphicsPackage
                 SetPixel(x, y);
             }
             numOfEllipses++;
-            EllipseDrawn();
+            OnEllipseDrawn();
         }
 
-        private void StartDrawEllipse()
-        {
-            Thread drawingThread = new Thread(new ThreadStart(drawEllipseAsyncDel));
-            drawingThread.Start();
-        }
-
-        private void OnEllipseDrawnCallback()
+        private void OnEllipseDrawn()
         {
             for(int i = 0; i < ellipseMidpoint. Xpoints.Count / 4; i++)
             {
@@ -92,10 +80,7 @@ namespace GraphicsPackage
                 string x = ellipseMidpoint.Xpoints[i].ToString();
                 string y = ellipseMidpoint.Ypoints[i].ToString();
                 string[] tableRow = { ellipseNum, decision, x, y, $"({x},{y})" };
-                Invoke(new MethodInvoker(delegate ()
-                {
-                    ellipseResultTable.Rows.Add(tableRow);
-                }));
+                ellipseResultTable.Rows.Add(tableRow);
             }
         }
 
@@ -116,7 +101,7 @@ namespace GraphicsPackage
                     }
                     else
                     {
-                        StartDrawEllipse();
+                        DrawEllipse();
                     }
                 }
                 else

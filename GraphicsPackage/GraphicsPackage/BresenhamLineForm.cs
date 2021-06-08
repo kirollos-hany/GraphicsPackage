@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -16,12 +15,8 @@ namespace GraphicsPackage
         private bool isMouseClicked;
         private int xStart, yStart, xEnd, yEnd;
         private int pixelWidth, pixelHeight;
-        private delegate void DrawLineAsyncDel();
-        private DrawLineAsyncDel drawLineAsyncDel;
-        private delegate void OnLineDrawn();
-        private event OnLineDrawn LineDrawn;
         private int linesDrawn;
-        private volatile bool fromDrawBtn;
+        private bool fromDrawBtn;
         public BresenhamLineForm()
         {
             InitializeComponent();
@@ -37,10 +32,8 @@ namespace GraphicsPackage
             picToDrawLine.Image = picBitmap;
             picBoxGraphics = picToDrawLine.CreateGraphics();
             pixelToDraw = new Bitmap(pixelWidth, pixelHeight);
-            drawLineAsyncDel = new DrawLineAsyncDel(DrawLineAsync);
             clearBtn.Click += OnClearBtnClicked;
             drawBtn.Click += OnDrawBtnClicked;
-            LineDrawn += OnLineDrawnCallback;
             backBtn.Click += OnBackBtnClicked;
             FormClosing += OnFormClosing;
             xRangeLabel.Text = $"{-picToDrawLine.Width} < X < {picToDrawLine.Width}";
@@ -78,16 +71,11 @@ namespace GraphicsPackage
             {
                 xEnd = mouseEventArgs.X;
                 yEnd = mouseEventArgs.Y;
-                StartDrawLine();
+                DrawLine();
                 isMouseClicked = false;
             }
         }
-        private void StartDrawLine()
-        {
-            Thread drawThread = new Thread(new ThreadStart(drawLineAsyncDel));
-            drawThread.Start();
-        }
-        private void DrawLineAsync()
+        private void DrawLine()
         {
             bresenhamLine.Algorithm(xStart, yStart, xEnd, yEnd);
             for (int i = 0; i < bresenhamLine.XPoints.Count; i++)
@@ -106,9 +94,9 @@ namespace GraphicsPackage
             }
             fromDrawBtn = false;
             linesDrawn++;
-            LineDrawn();
+            OnLineDrawn();
         }
-        private void OnLineDrawnCallback()
+        private void OnLineDrawn()
         {
             for (int i = 0; i < bresenhamLine.XPoints.Count; i++)
             {
@@ -118,10 +106,7 @@ namespace GraphicsPackage
                 string y = bresenhamLine.YPoints[i].ToString();
                 string pk = bresenhamLine.PKPoints[i].ToString();
                 string[] tableRow = { linesDrawn.ToString(), bresenhamLine.Octant, slope, iStr, pk,x, y, $"({x},{y})" };
-                Invoke(new MethodInvoker(delegate ()
-                {
-                    linesResultTable.Rows.Add(tableRow);
-                }));
+                linesResultTable.Rows.Add(tableRow);
             }
         }
         private void OnClearBtnClicked(object source, EventArgs args)
@@ -153,7 +138,7 @@ namespace GraphicsPackage
                     else
                     {
                         fromDrawBtn = true;
-                        StartDrawLine();
+                        DrawLine();
                     }
                 }
                 else
