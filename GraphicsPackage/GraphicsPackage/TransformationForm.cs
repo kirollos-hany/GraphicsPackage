@@ -101,6 +101,8 @@ namespace GraphicsPackage
                 {
                     y *= -1;
                 }
+                x %= picToDraw.Width;
+                y %= picToDraw.Height;
                 pixelToDraw.SetPixel(0, 0, Color.Black);
                 picBoxGraphics.DrawImage(pixelToDraw, x, y);
         }
@@ -140,10 +142,10 @@ namespace GraphicsPackage
                 endPoints[2] = 1;
                 startPoints = transformation.Translation(dx, dy, startPoints);
                 endPoints = transformation.Translation(dx, dy, endPoints);
-                xStart = startPoints[0] % picToDraw.Width;
-                yStart = startPoints[1] % picToDraw.Height;
-                xEnd = endPoints[0] % picToDraw.Width;
-                yEnd = endPoints[1] % picToDraw.Height;
+                xStart = startPoints[0];
+                yStart = startPoints[1];
+                xEnd = endPoints[0];
+                yEnd = endPoints[1];
                 DrawLine();
                 string[] row = { "Translation", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
                 transformResultTable.Rows.Add(row);
@@ -173,10 +175,10 @@ namespace GraphicsPackage
                 endPoints[2] = 1;
                 startPoints = transformation.Reflect(axisIndex, startPoints);
                 endPoints = transformation.Reflect(axisIndex, endPoints);
-                xStart = startPoints[0] % picToDraw.Width;
-                yStart = startPoints[1] % picToDraw.Height;
-                xEnd = endPoints[0] % picToDraw.Width;
-                yEnd = endPoints[1] % picToDraw.Height;
+                xStart = startPoints[0];
+                yStart = startPoints[1];
+                xEnd = endPoints[0];
+                yEnd = endPoints[1];
                 DrawLine();
                 string[] row = { "Reflect", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
                 transformResultTable.Rows.Add(row);
@@ -205,10 +207,10 @@ namespace GraphicsPackage
                 endPoints[2] = 1;
                 startPoints = transformation.Shear(startPoints, axisIndex, sh);
                 endPoints = transformation.Shear(endPoints, axisIndex, sh);
-                xStart = startPoints[0] % picToDraw.Width;
-                yStart = startPoints[1] % picToDraw.Height;
-                xEnd = endPoints[0] % picToDraw.Width;
-                yEnd = endPoints[1] % picToDraw.Height;
+                xStart = startPoints[0];
+                yStart = startPoints[1];
+                xEnd = endPoints[0];
+                yEnd = endPoints[1];
                 DrawLine();
                 string[] row = { "Shear", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
                 transformResultTable.Rows.Add(row);
@@ -238,10 +240,10 @@ namespace GraphicsPackage
                 endPoints[2] = 1;
                 startPoints = transformation.Scaling(scaleX, scaleY, startPoints);
                 endPoints = transformation.Scaling(scaleX, scaleY, endPoints);
-                xStart = startPoints[0] % picToDraw.Width;
-                yStart = startPoints[1] % picToDraw.Height;
-                xEnd = endPoints[0] % picToDraw.Width;
-                yEnd = endPoints[1] % picToDraw.Height;
+                xStart = startPoints[0];
+                yStart = startPoints[1];
+                xEnd = endPoints[0];
+                yEnd = endPoints[1];
                 DrawLine();
                 string[] row = { "Scale", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
                 transformResultTable.Rows.Add(row);
@@ -278,10 +280,10 @@ namespace GraphicsPackage
                 endPoints[2] = 1;
                 startPoints = transformation.Rotation(theta, startPoints);
                 endPoints = transformation.Rotation(theta, endPoints);
-                xStart = Convert.ToInt32(startPoints[0]) % picToDraw.Width;
-                yStart = Convert.ToInt32(startPoints[1]) % picToDraw.Height;
-                xEnd = Convert.ToInt32(endPoints[0]) % picToDraw.Width;
-                yEnd = Convert.ToInt32(endPoints[1]) % picToDraw.Height;
+                xStart = Convert.ToInt32(startPoints[0]);
+                yStart = Convert.ToInt32(startPoints[1]);
+                xEnd = Convert.ToInt32(endPoints[0]);
+                yEnd = Convert.ToInt32(endPoints[1]);
                 DrawLine();
                 string[] row = { "Rotate", $"({startXPoints[i]}, {startYPoints[i]}), ({endXPoints[i]},{endYPoints[i]})", $"({xStart},{yStart}), ({xEnd},{yEnd})" };
                 transformResultTable.Rows.Add(row);
@@ -299,7 +301,7 @@ namespace GraphicsPackage
             {
                     ReflectPolygon(reflectCB.SelectedIndex);
             }
-            if (shearCB.SelectedIndex != -1 && !string.IsNullOrEmpty(shearCB.Text) && !shearCB.Text.Equals("sh"))
+            if (shearCB.SelectedIndex != -1 && !string.IsNullOrEmpty(shearCB.Text) && !shearTB.Text.Equals("sh"))
             {
                 try
                 {

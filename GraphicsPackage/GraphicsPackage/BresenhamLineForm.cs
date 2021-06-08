@@ -51,6 +51,8 @@ namespace GraphicsPackage
                 {
                     y *= -1;
                 }
+                x %= picToDrawLine.Width;
+                y %= picToDrawLine.Height;
                 pixelToDraw.SetPixel(0, 0, Color.Black);
                 picBoxGraphics.DrawImage(pixelToDraw, x, y);
             }
@@ -130,16 +132,9 @@ namespace GraphicsPackage
                     yStart = Convert.ToInt32(yStartTextBox.Text);
                     xEnd = Convert.ToInt32(xEndTextBox.Text);
                     yEnd = Convert.ToInt32(yEndTextBox.Text);
-                    if(Math.Abs(xStart) > picToDrawLine.Width || Math.Abs(xEnd) > picToDrawLine.Width || Math.Abs(yStart) > picToDrawLine.Height || Math.Abs(yEnd) > picToDrawLine.Height)
-                    {
-                        MessageBox.Show("Please enter values within valid range", "Out Of Range", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    }
-                    else
-                    {
-                        fromDrawBtn = true;
-                        DrawLine();
-                    }
+                    fromDrawBtn = true;
+                    DrawLine();
+            
                 }
                 else
                 {

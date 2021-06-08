@@ -53,6 +53,8 @@ namespace GraphicsPackage
                 {
                     y *= -1;
                 }
+                x %= picToDrawEllipse.Width;
+                y %= picToDrawEllipse.Height;
                 pixelToDraw.SetPixel(0, 0, Color.Black);
                 picBoxGraphics.DrawImage(pixelToDraw, x, y);
             }
